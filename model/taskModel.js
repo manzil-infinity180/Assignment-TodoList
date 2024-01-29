@@ -10,8 +10,18 @@ const taskSchema = new mongoose.Schema({
     },
     done:{
         type:Boolean,
-        default:false
-    }
+        default:false,
+        enum:["true","false"]
+    },
+    categories:{
+        type:String,
+        default:"not-completed",
+        enum:["not-completed","completed","inprogress"]
+    },
+    createdAt: {
+        type: Date,
+        default: new Date().toISOString()
+      },
 
 });
 
