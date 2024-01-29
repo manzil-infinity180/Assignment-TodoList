@@ -28,6 +28,12 @@ exports.createtask= async(req,res,next)=>{
 }
 exports.getAllTask = async(req,res,next)=>{
     try{
+        // const {categories:value} = req.query;
+        // console.log(value); 
+        // if(req.query){
+        //     const x = await Task.find({categories : value});
+        //     console.log(x);
+        // }
         const task = await Task.find();
         if(!task){
             throw new Error("Something went wrong or you do not have any task yet!");
@@ -101,4 +107,13 @@ exports.deleteTask = async(req,res,next)=>{
         });
     }
 }
+exports.searchByCategories = async(req,res,next)=>{
+    try{
+        
+        // const tasks = await Task.find({categories :})
+        console.log(req.query);
 
+    }catch(err){
+
+    }
+}
