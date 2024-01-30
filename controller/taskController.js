@@ -28,17 +28,25 @@ exports.createtask= async(req,res,next)=>{
 }
 exports.getAllTask = async(req,res,next)=>{
     try{
-        // const {categories:value} = req.query;
-        // console.log(value); 
-        // if(req.query){
-        //     const x = await Task.find({categories : value});
-        //     console.log(x);
-        // }
-        const task = await Task.find();
+        const categories = req.query.categories;
+        if(categories){
+            const filter ={};
+            filter.categories = categories
+             const categoryData = await Task.find(filter);
+             console.log(categoryData);
+            console.log(categoryData);
+            res.status(200).json({
+                total: categoryData.length,
+                status:"completed",
+                data:{
+                    categoryData
+                }
+            })
+        }else{
+            const task = await Task.find();
         if(!task){
             throw new Error("Something went wrong or you do not have any task yet!");
         }
-        
         res.status(200).json({
             total: task.length,
             status:"Success",
@@ -46,7 +54,7 @@ exports.getAllTask = async(req,res,next)=>{
                 task
             }
         });
-
+    }   
     }catch(err){
         res.status(400).json({
             status:"Failed",
@@ -65,7 +73,7 @@ exports.updateTask = async(req,res,next)=>{
             throw new Error("No task with these id found,please check again!");
         }
         
-        const {done} = prevtaskData;
+        const {done,categories} = prevtaskData;
        
         if(done &&  req.body.done){
             throw new Error("Task already marked as COMPLETED, so you could not mark as Completed AGAIN!!");
@@ -74,8 +82,23 @@ exports.updateTask = async(req,res,next)=>{
         if(req.body.title==""){
             throw new Error("Title can not be empty string");
         }
+        if(!req.body.categories==="inprogress"){
+            prevtaskData.categories = "inprogress";
+            throw new Error("You can not updated category as completed,it will automatically update if you update 'done' ")
+        }
+        
+        // if done is true then categories for that title should be completed
+        if(req.body.done){
+            prevtaskData.categories="completed"
+        }
+        
+        const body ={
+            ...req.body,
+            categories:prevtaskData.categories
+        }
+        console.log(body);
 
-        const task = await Task.findByIdAndUpdate(req.params.id,req.body);
+        const task = await Task.findByIdAndUpdate(req.params.id,body);
         
         res.status(200).json({
             status:"Success",
@@ -83,6 +106,7 @@ exports.updateTask = async(req,res,next)=>{
         });
 
     }catch(err){
+        console.log(err);
         res.status(400).json({
             status:"Failed",
             err: err.reason || err.message,
