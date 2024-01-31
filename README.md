@@ -83,7 +83,9 @@ https://github.com/manzil-infinity180/Assignment-TodoList/assets/119070053/13b62
 
 # Unit Testing 
 - Run the test - `npm run test`
-<img width="1680" alt="Screenshot 2024-01-31 at 11 39 05 PM" src="https://github.com/manzil-infinity180/Assignment-TodoList/assets/119070053/504e57a5-c1cc-439e-96b0-a7a2407d499c">
+<img width="1473" alt="Screenshot 2024-02-01 at 12 07 51 AM" src="https://github.com/manzil-infinity180/Assignment-TodoList/assets/119070053/b23adc4a-4b2c-4482-9c11-5ea98c964025">
+
+
 
   
   
