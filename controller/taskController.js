@@ -33,8 +33,7 @@ exports.getAllTask = async(req,res,next)=>{
             const filter ={};
             filter.categories = categories
              const categoryData = await Task.find(filter);
-             console.log(categoryData);
-            console.log(categoryData);
+            
             res.status(200).json({
                 total: categoryData.length,
                 status:"success",
@@ -67,8 +66,7 @@ exports.updateTask = async(req,res,next)=>{
     try{
         
         const prevtaskData = await Task.findById(req.params.id);
-        console.log(req.body);
-        console.log(prevtaskData);
+   
         if(!prevtaskData){
             throw new Error("No task with these id found,please check again!");
         }
@@ -95,7 +93,7 @@ exports.updateTask = async(req,res,next)=>{
             ...req.body,
             categories:prevtaskData.categories
         }
-        console.log(body);
+       
 
         const task = await Task.findByIdAndUpdate(req.params.id,body);
         
@@ -105,7 +103,7 @@ exports.updateTask = async(req,res,next)=>{
         });
 
     }catch(err){
-        console.log(err);
+       
         res.status(400).json({
             status:"Failed",
             err: err.reason || err.message,
@@ -130,13 +128,4 @@ exports.deleteTask = async(req,res,next)=>{
         });
     }
 }
-exports.searchByCategories = async(req,res,next)=>{
-    try{
-        
-        // const tasks = await Task.find({categories :})
-        console.log(req.query);
 
-    }catch(err){
-
-    }
-}

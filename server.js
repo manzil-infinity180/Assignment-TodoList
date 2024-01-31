@@ -9,6 +9,8 @@ mongoose.connect(DB).then(()=>{
     console.log("Successfully connected to database");
 })
    
-app.listen(PORT,()=>{
+const server = app.listen(PORT,()=>{
     console.log("Server running on port "+PORT);
 })
+module.exports = server;
+
