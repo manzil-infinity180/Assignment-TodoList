@@ -37,7 +37,7 @@ exports.getAllTask = async(req,res,next)=>{
             console.log(categoryData);
             res.status(200).json({
                 total: categoryData.length,
-                status:"completed",
+                status:"success",
                 data:{
                     categoryData
                 }
@@ -82,8 +82,7 @@ exports.updateTask = async(req,res,next)=>{
         if(req.body.title==""){
             throw new Error("Title can not be empty string");
         }
-        if(!req.body.categories==="inprogress"){
-            prevtaskData.categories = "inprogress";
+        if(req.body.categories){
             throw new Error("You can not updated category as completed,it will automatically update if you update 'done' ")
         }
         
