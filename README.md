@@ -10,6 +10,8 @@ To start the backend server, follow these steps:
 
 **Step 2: Start the Server**
 - Run `npm start` to launch the server using Nodemon, which automatically restarts the server when changes are made. If you don't have Nodemon installed, you can do so globally by running `npm i -g nodemon`
+- Prod : `npm run start`
+- Dev : `npm run dev`
 
 **Step 3: Setup Dependency **
 - Replace the crediatals with your creaditals in config.env file (for reference i added my own creditals)
